@@ -1,0 +1,16 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: gold; /* Warna background emas */
+}
+
+th, td {
+    border: 1px solid black; /* Border 1px solid */
+    padding: 5px; /* Padding 5px */
+    text-align: left;
+}
+
+th {
+    background-color: gold; /* Warna background emas */
+    color: black; /* Warna teks hitam */
+}
