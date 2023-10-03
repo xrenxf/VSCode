@@ -36,11 +36,8 @@ class User:
         print(f"Anda tidak memiliki buku '{judul}' untuk dikembalikan.")
 
 admin = Admin()
-admin.input_buku("Laut Bercerita", "Leila C. Chudori")
-admin.input_buku("Bumi Manusia", "Pramoedya Ananta Toer")
-admin.input_buku("Saman", "Ayu Utami")
-
 user = User()
+# Contoh Judul Buku Laut Bercerita-Leila C. Chudori, Bumi Manusia-Pramoedya Ananta Toer, Saman-Ayu Utami)
 
 while True:
     print("\n=== Sistem Informasi Peminjaman Buku ===")
