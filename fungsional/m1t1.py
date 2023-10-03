@@ -81,3 +81,4 @@ while True:
         break
     else:
         print("Pilihan tidak valid!")
+# exception, list peserta
