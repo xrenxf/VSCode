@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:aplikasitry/temperature.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Smart Home App',
+      title: 'Smart Home App',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
@@ -43,9 +42,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
                     'SMART HOME APP',
                     style: TextStyle(
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 32),
                     Center(
                       child: Image.asset(
-                        'assets/images/banner.png',
+                        'assets/banner.png',
                         scale: 1.2,
                       ),
                     ),
@@ -98,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _cardMenu(
-                          icon: 'assets/images/energy.png',
+                          icon: 'assets/energy.png',
                           title: 'ENERGY',
                         ),
                         _cardMenu(
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           },
-                          icon: 'assets/images/temperature.png',
+                          icon: 'assets/temperature.png',
                           title: 'TEMPERATURE',
                           color: Colors.indigoAccent,
                           fontColor: Colors.white,
@@ -122,11 +121,11 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _cardMenu(
-                          icon: 'assets/images/water.png',
+                          icon: 'assets/water.png',
                           title: 'WATER',
                         ),
                         _cardMenu(
-                          icon: 'assets/images/entertainment.png',
+                          icon: 'assets/entertainment.png',
                           title: 'ENTERTAINMENT',
                         ),
                       ],
