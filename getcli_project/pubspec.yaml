@@ -1,4 +1,4 @@
-name: aplikasitry
+name: getcli_project
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
@@ -7,7 +7,6 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
-  percent_indicator: ^3.4.0
   get: 4.6.6
   flutter: 
     sdk: flutter
@@ -18,7 +17,5 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
-  assets: 
-    - assets/
   uses-material-design: true
 

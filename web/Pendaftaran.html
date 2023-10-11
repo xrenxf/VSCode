@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        *{
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0b87ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form{
+           width: 500px; 
+           border: 2px solid #ccc;
+           padding: 40px;
+           background: #fff;
+           border-radius: 15px;
+        }
+        input{
+            display: block;
+            border: 2px solid #ccc;
+            width: 95%;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        textarea{
+            display: block;
+            border: 2px solid #ccc;
+            width: 95%;
+            padding: 10px;
+            margin: 10px auto;
+        }
+        label{
+            color: #888;
+            font-size: 18px;
+            padding: 10px;
+        }
+        button{
+            float: right;
+            background: #0b87ff;
+            padding: 10px 15px;
+            color: #fff;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: none;
+        }
+        button:hover{
+            opacity: .7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="formulir">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="alamat">Alamat:</label>
+            <textarea id="alamat" name="alamat" required></textarea>
+
+            <button type="button" onclick="validateForm()">Daftar</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        function validateForm() {
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var alamat = document.getElementById("alamat").value;
+
+            if (nama === "" || email === "" || alamat === "") {
+                alert("Semua field harus diisi.");
+            } else if (!isValidEmail(email)) {
+                alert("Email tidak valid.");
+            } else {
+                // Semua input valid, Anda bisa mengirim data formulir ke server di sini
+                alert("Pendaftaran sukses!");
+            }
+        }
+
+        function isValidEmail(email) {
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailPattern.test(email);
+        }
+    </script>
+</body>
+</html>
