@@ -1,0 +1,25 @@
+name: aplikasi
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.1.2 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  percent_indicator: ^3.4.0
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  image_picker: ^0.8.4+4
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  assets: 
+    - assets/
+  uses-material-design: true
+
