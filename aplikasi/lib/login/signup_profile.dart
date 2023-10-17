@@ -29,7 +29,7 @@ class SignUpProfile extends StatelessWidget {
           child: InkWell(
             child: const Icon(Icons.camera),
             onTap: () {
-              // print("Camera clicked");
+              print("Camera clicked");
               showModalBottomSheet(
                 context: context,
                 builder: (context) => bottomSheet(context),
@@ -125,7 +125,7 @@ class SignUpProfile extends StatelessWidget {
 
   Future<void> takePhoto(ImageSource source) async {
     final pickedImage =
-        await imagePicker.pickImage(source: source, imageQuality: 100);
+      await imagePicker.pickImage(source: source, imageQuality: 100);
 
     pickedFile = File(pickedImage!.path);
     signUpController.setProfileImagePath(pickedFile!.path);

@@ -1,13 +1,12 @@
+import 'package:aplikasi/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:aplikasi/login/password.dart';
-import 'package:aplikasi/login/user_field.dart';
+import 'package:aplikasi/login/pass_field.dart';
+import 'package:aplikasi/login/text_field.dart';
 import 'package:aplikasi/login/text_decorator.dart';
-import 'package:aplikasi/welcome_page/custom_button.dart';
+import 'package:aplikasi/welcome/custom_button.dart';
 import 'package:aplikasi/login/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-
   final _formKey = GlobalKey<FormState>();
   TextEditingController useridController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -17,6 +16,8 @@ class LoginPage extends StatelessWidget {
   Color userIdHintTextColor = Colors.indigoAccent;
   IconData useridTextFieldPrefixIcon = Icons.person;
   Color useridTextFieldPrefixIconColor = Colors.indigoAccent;
+
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +75,18 @@ class LoginPage extends StatelessWidget {
                       height: 15,
                     ),
                     CustomButton(
-                        buttonColor: Colors.indigoAccent,
-                        buttontext: "LOGIN",
-                        textColor: Colors.white,
-                        handleButtonClick: () {
-                        print("Login");
+                      buttonColor: Colors.indigoAccent,
+                      buttontext: "LOGIN",
+                      textColor: Colors.white,
+                      handleButtonClick: () {
+                      print("Login");
+                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
                       },
                     ),
                     const SizedBox(
@@ -106,9 +114,9 @@ class LoginPage extends StatelessWidget {
                           ),
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpPage()));
                           },
                         ),
                       ]

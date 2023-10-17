@@ -1,6 +1,6 @@
 class CustomWebServices {
   static String signup_api_url =
-      "https://thedigitalgamezone.com/Abhi/flutter-tutorial-api/signUpUserAPI.php";
+      "url";
 
   static String PROFILE_IMAGE = "userProfileImg";
   static String USER_NAME = "userName";

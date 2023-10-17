@@ -1,10 +1,11 @@
+import 'package:aplikasi/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi/login/login_page.dart';
 import 'package:aplikasi/login/signup_profile.dart';
-import 'package:aplikasi/login/user_field.dart';
+import 'package:aplikasi/login/text_field.dart';
 import 'package:aplikasi/login/text_decorator.dart';
-import 'package:aplikasi/welcome_page/custom_button.dart';
+import 'package:aplikasi/welcome/custom_button.dart';
 import 'package:aplikasi/controller/signup_controller.dart';
 
 
@@ -13,7 +14,6 @@ class SignUpPage extends StatelessWidget {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController mobileController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
 
@@ -27,7 +27,7 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: Colors.indigo.shade50,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Form(
             key: _globalKey,
             child: Column(
@@ -95,10 +95,19 @@ class SignUpPage extends StatelessWidget {
                   height: 15,
                 ),
                 CustomButton(
-                    buttonColor: Colors.indigoAccent,
-                    buttontext: "Sign Up",
-                    textColor: Colors.white,
-                    handleButtonClick: () {}
+                  buttonColor: Colors.indigoAccent,
+                  buttontext: "Sign Up",
+                  textColor: Colors.white,
+                  handleButtonClick: () {
+                    signup();
+
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -138,5 +147,23 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  void signup() {
+    final _isValid = _globalKey.currentState!.validate();
+    if (_isValid) {
+      print(nameController.text);
+      print(emailController.text);
+      print(passController.text);
+      print(confirmPassController.text);
+
+      signUpController.signUpUser(
+          nameController.text,
+          emailController.text,
+          passController.text,
+          confirmPassController.text);
+    } else {
+      return null;
+    }
   }
 }

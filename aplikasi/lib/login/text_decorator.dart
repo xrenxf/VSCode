@@ -15,7 +15,7 @@ class TextDecorator extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15),
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       decoration: BoxDecoration(
-        color: Color(0xffccccff),
+        color: const Color(0xffccccff),
         borderRadius: BorderRadius.circular(20),
       ),
       child: child,

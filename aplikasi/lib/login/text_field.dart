@@ -24,6 +24,7 @@ class UserIdTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: useridController,
+      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return userIdErrorText;
