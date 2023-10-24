@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:aplikasi/model/custom_webservices.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:aplikasi/login/login_page.dart';
+import 'package:aplikasi/model/custom_webservices.dart';
+import 'package:http/http.dart' as http;
+import 'package:aplikasi/login/login_page.dart';
 
 class SignUpController extends GetxController {
   var isProficPicPathSet = false.obs;
@@ -70,45 +70,45 @@ class SignUpController extends GetxController {
     return emailValid;
   }
 
-  // Future<void> sendUserDataToServer() async {
-  //   Map<String, dynamic> dataBody = {
-  //     CustomWebServices.PROFILE_IMAGE: profileImageBase64,
-  //     CustomWebServices.USER_NAME: userName,
-  //     CustomWebServices.USER_EMAIL: userEmail,
-  //     CustomWebServices.USER_PASS: userPass,
-  //   };
+  Future<void> sendUserDataToServer() async {
+    Map<String, dynamic> dataBody = {
+      CustomWebServices.PROFILE_IMAGE: profileImageBase64,
+      CustomWebServices.USER_NAME: userName,
+      CustomWebServices.USER_EMAIL: userEmail,
+      CustomWebServices.USER_PASS: userPass,
+    };
 
-    // var dataToSend = json.encode(dataBody);
+    var dataToSend = json.encode(dataBody);
 
-    // var response = await http.post(Uri.parse(CustomWebServices.signup_api_url),
-    //     body: dataToSend);
+    var response = await http.post(Uri.parse(CustomWebServices.signup_api_url),
+        body: dataToSend);
 
-    // print(response.body);
+    print(response.body);
 
-    // if (response.statusCode == 200) {
-    //   Map<String, dynamic> responseData = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> responseData = jsonDecode(response.body);
 
-    //   if (responseData['r_msg'] == "success") {
-    //     Get.to(LoginPage());
-    //   } else if (responseData['r_msg'] == "failed") {
-    //     Get.snackbar(
-    //       "Sign Up Failed",
-    //       "Server Problem Occured",
-    //       backgroundColor: Colors.black,
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       borderRadius: 10,
-    //       borderWidth: 2,
-    //     );
-    //   } else if (responseData['r_msg'] == "mobile number already exist") {
-    //     Get.snackbar(
-    //       "Sign Up Failed",
-    //       "You have alreday registered",
-    //       backgroundColor: Colors.black,
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       borderRadius: 10,
-    //       borderWidth: 2,
-    //     );
-    //   }
-    // }
-  // }
+      if (responseData['r_msg'] == "success") {
+        Get.to(LoginPage());
+      } else if (responseData['r_msg'] == "failed") {
+        Get.snackbar(
+          "Sign Up Failed",
+          "Server Problem Occured",
+          backgroundColor: Colors.black,
+          snackPosition: SnackPosition.BOTTOM,
+          borderRadius: 10,
+          borderWidth: 2,
+        );
+      } else if (responseData['r_msg'] == "mobile number already exist") {
+        Get.snackbar(
+          "Sign Up Failed",
+          "You have alreday registered",
+          backgroundColor: Colors.black,
+          snackPosition: SnackPosition.BOTTOM,
+          borderRadius: 10,
+          borderWidth: 2,
+        );
+      }
+    }
+  }
 }
