@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aplikasi/model/custom_webservices.dart';
 import 'package:http/http.dart' as http;
-import 'package:aplikasi/login/login_page.dart';
+import 'package:aplikasi/views/login/login_page.dart';
 
 class SignUpController extends GetxController {
   var isProficPicPathSet = false.obs;
@@ -15,6 +15,7 @@ class SignUpController extends GetxController {
 
   String userName = "";
   String userEmail = "";
+  String userMobile = "";
   String userPass = "";
 
   void setProfileImagePath(String path) {
@@ -25,13 +26,12 @@ class SignUpController extends GetxController {
     profileImageBase64 = base64.encode(bytes);
   }
 
-  void signUpUser(String name, String email, String pass,
-      String rePass) {
+  void signUpUser(String name, String email, String mobile, String pass, String rePass, String text) {
     if (isProficPicPathSet.value == false) {
       Get.snackbar(
         "Sign Up Failed",
         "Please Capture/Select Profile Picture",
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.indigoAccent,
         snackPosition: SnackPosition.BOTTOM,
         borderRadius: 10,
         borderWidth: 2,
@@ -40,7 +40,7 @@ class SignUpController extends GetxController {
       Get.snackbar(
         "Sign Up Failed",
         "Password does not match",
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.indigoAccent,
         snackPosition: SnackPosition.BOTTOM,
         borderRadius: 10,
         borderWidth: 2,
@@ -49,7 +49,7 @@ class SignUpController extends GetxController {
       Get.snackbar(
         "Sign Up Failed",
         "Email Id is not valid",
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.indigoAccent,
         snackPosition: SnackPosition.BOTTOM,
         borderRadius: 10,
         borderWidth: 2,
@@ -57,9 +57,10 @@ class SignUpController extends GetxController {
     } else {
       userName = name;
       userEmail = email;
+      userMobile = mobile;
       userPass = pass;
 
-      // sendUserDataToServer();
+      sendUserDataToServer();
     }
   }
 
@@ -72,10 +73,11 @@ class SignUpController extends GetxController {
 
   Future<void> sendUserDataToServer() async {
     Map<String, dynamic> dataBody = {
-      CustomWebServices.PROFILE_IMAGE: profileImageBase64,
       CustomWebServices.USER_NAME: userName,
       CustomWebServices.USER_EMAIL: userEmail,
+      CustomWebServices.USER_MOBILE: userMobile,
       CustomWebServices.USER_PASS: userPass,
+      CustomWebServices.PROFILE_IMAGE: profileImageBase64,
     };
 
     var dataToSend = json.encode(dataBody);
@@ -86,29 +88,39 @@ class SignUpController extends GetxController {
     print(response.body);
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> responseData = jsonDecode(response.body);
+      try {
+        Map<String, dynamic> responseData = jsonDecode(response.body);
 
-      if (responseData['r_msg'] == "success") {
-        Get.to(LoginPage());
-      } else if (responseData['r_msg'] == "failed") {
-        Get.snackbar(
-          "Sign Up Failed",
-          "Server Problem Occured",
-          backgroundColor: Colors.black,
-          snackPosition: SnackPosition.BOTTOM,
-          borderRadius: 10,
-          borderWidth: 2,
-        );
-      } else if (responseData['r_msg'] == "mobile number already exist") {
-        Get.snackbar(
-          "Sign Up Failed",
-          "You have alreday registered",
-          backgroundColor: Colors.black,
-          snackPosition: SnackPosition.BOTTOM,
-          borderRadius: 10,
-          borderWidth: 2,
-        );
+        if (responseData['r_msg'] == "success") {
+          Get.to(LoginPage());
+        } else if (responseData['r_msg'] == "failed") {
+          Get.snackbar(
+            "Sign Up Failed",
+            "Server Problem Occurred",
+            backgroundColor: Colors.indigoAccent,
+            snackPosition: SnackPosition.BOTTOM,
+            borderRadius: 10,
+            borderWidth: 2,
+          );
+        } else if (responseData['r_msg'] == "mobile number already exist") {
+          Get.snackbar(
+            "Sign Up Failed",
+            "You have already registered",
+            backgroundColor: Colors.indigoAccent,
+            snackPosition: SnackPosition.BOTTOM,
+            borderRadius: 10,
+            borderWidth: 2,
+          );
+        } else {
+          // Handle unexpected response here
+        }
+      } catch (e) {
+        // Handle JSON decoding error
+        print("Error decoding JSON: $e");
       }
+    } else {
+      // Handle HTTP status code other than 200
+      print("HTTP Status Code: ${response.statusCode}");
     }
   }
 }

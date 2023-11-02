@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aplikasi/pages/temperature.dart';
+import 'package:aplikasi/views/pages/temperature.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -1,10 +1,10 @@
-import 'package:aplikasi/pages/home_page.dart';
+import 'package:aplikasi/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:aplikasi/login/pass_field.dart';
-import 'package:aplikasi/login/text_field.dart';
-import 'package:aplikasi/login/text_decorator.dart';
-import 'package:aplikasi/welcome/custom_button.dart';
-import 'package:aplikasi/login/signup_page.dart';
+import 'package:aplikasi/views/login/pass_field.dart';
+import 'package:aplikasi/views/login/text_field.dart';
+import 'package:aplikasi/views/login/text_decorator.dart';
+import 'package:aplikasi/views/welcome/custom_button.dart';
+import 'package:aplikasi/views/login/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();

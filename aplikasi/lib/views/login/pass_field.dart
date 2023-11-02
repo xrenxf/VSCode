@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserPassTextField extends StatefulWidget {
   UserPassTextField({
@@ -30,6 +31,7 @@ class UserPassTextField extends StatefulWidget {
 
 class _UserPassTextFieldState extends State<UserPassTextField> {
   bool isPassWordVisible = false;
+  final userPassVisibilityController = Get.put(UserPassVisibilityController());
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -65,7 +67,7 @@ class _UserPassTextFieldState extends State<UserPassTextField> {
           onPressed: () {
             print("Hello");
 
-            //TODO: will use getx here
+            userPassVisibilityController.toggleVisibility();
 
             setState(() {
               isPassWordVisible = !isPassWordVisible;
@@ -74,5 +76,13 @@ class _UserPassTextFieldState extends State<UserPassTextField> {
         ),
       ),
     );
+  }
+}
+
+class UserPassVisibilityController extends GetxController {
+  var isPassWordVisible = false.obs; // Create an observable variable
+
+  void toggleVisibility() {
+    isPassWordVisible.value = !isPassWordVisible.value; // Toggle visibility state
   }
 }
