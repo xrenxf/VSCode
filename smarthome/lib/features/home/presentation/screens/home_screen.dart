@@ -44,38 +44,101 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         appBar: const ShAppBar(),
 
-        drawer: Drawer( // Add a Drawer widget
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text(
-                  'Drawer Header',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+        drawer: Drawer(
+          width: 200,
+          child: Container(
+            color: Colors.grey[800],
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Kristin',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'kristin@gmail.com',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              ListTile(
-                title: Text('Item 1'),
-                onTap: () {
-                  // Handle item 1 tap
-                  Navigator.pop(context); // Close the drawer
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  // Handle item 2 tap
-                  Navigator.pop(context); // Close the drawer
-                },
-              ),
-              // Add more list items as needed
-            ],
+                ListTile(
+                  leading: const Icon(
+                    Icons.home,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Home',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                    ),
+                  title: const Text(
+                    'Setting',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.people,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Profile',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.public,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Webview',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WebViewPage()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.logout,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Log Out',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                  },
+                ),
+              ],
+            ),
           ),
         ),
 

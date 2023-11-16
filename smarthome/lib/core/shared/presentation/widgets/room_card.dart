@@ -141,30 +141,41 @@ class CameraIconButton extends StatelessWidget {
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(
-              child: ListTile(
-                leading: const Icon(Icons.photo),
-                title: const Text('Gallery'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _getImageFromGallery();
-                },
+        return Container(
+          color: Colors.grey[800],
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.photo,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Gallery',
+                    style: TextStyle(color: Colors.white),),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _getImageFromGallery();
+                  },
+                ),
               ),
-            ),
-            Expanded(
-              child: ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: const Text('Camera'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _getImageFromCamera();
-                },
-              ),
-            )
-          ],
+              Expanded(
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.white,),
+                  title: const Text(
+                    'Camera',
+                    style: TextStyle(color: Colors.white),),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _getImageFromCamera();
+                  },
+                ),
+              )
+            ],
+          ),
         );
       },
     );
