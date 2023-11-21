@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smarthome/core/core.dart';
 import 'package:ui_common/ui_common.dart';
@@ -37,6 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
     pageNotifier.value = controller.page ?? 0;
   }
 
+  void logout(){
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LightedBackgound(
@@ -48,94 +53,146 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 200,
           child: Container(
             color: Colors.grey[800],
-            child: ListView(
-              padding: EdgeInsets.zero,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                Column(
+                  children: [
+                    const DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Kristin',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Kristin',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            'kristin@gmail.com',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'kristin@gmail.com',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                    color: Colors.white,),
-                  title: const Text(
-                    'Home',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
                     ),
-                  title: const Text(
-                    'Setting',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                  },
+
+                    const SizedBox(height: 25),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.home,
+                          color: Colors.white,),
+                        title: const Text(
+                          'Home',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/home_screen');
+                        },
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                          ),
+                        title: const Text(
+                          'Setting',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.person,
+                          color: Colors.white,),
+                        title: const Text(
+                          'Profile',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/profile_page');
+                        },
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.people,
+                          color: Colors.white,),
+                        title: const Text(
+                          'Users',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/users_page');
+                        },
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.public,
+                          color: Colors.white,),
+                        title: const Text(
+                          'Webview',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/webview_page');
+                        },
+                      ),
+                    )
+                  ]
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.people,
-                    color: Colors.white,),
-                  title: const Text(
-                    'Profile',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.public,
-                    color: Colors.white,),
-                  title: const Text(
-                    'Webview',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WebViewPage()));
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.logout,
-                    color: Colors.white,),
-                  title: const Text(
-                    'Log Out',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                  },
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0, bottom: 25),
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
+                      title: const Text(
+                        'Log Out',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        logout();
+                      },
+                    ),
                 ),
               ],
             ),

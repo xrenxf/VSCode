@@ -23,6 +23,9 @@ dependencies:
   dotted_border: ^2.1.0
   http: ^1.1.0
   webview_flutter: ^4.4.2
+  firebase_core: ^2.22.0
+  firebase_auth: ^4.14.0
+  cloud_firestore: ^4.13.1
 
 dev_dependencies:
   flutter_test:
