@@ -57,20 +57,12 @@ titik_B_genap_transformed = perbesaran_aksi(*rotasi_aksi(*translasi_aksi(*titik_
 persamaan_garis_ganjil = line_equation_of(point(*titik_A_ganjil_transformed), point(*titik_A_ganjil))
 persamaan_garis_genap = line_equation_of(point(*titik_A_genap_transformed), point(*titik_B_genap_transformed))
 
-# print("Koordinat hasil transformasi (NIM Ganjil):")
-# cetak_koordinat(translasi_aksi, *titik_A_ganjil)
-# cetak_koordinat(rotasi_aksi, *titik_A_ganjil_transformed)
-# cetak_koordinat(perbesaran_aksi, *titik_A_ganjil_transformed)
+# OUTPUT
 print("\nPersamaan garis sebelum transformasi (NIM Ganjil):")
 print(line_equation_of(point(*titik_A_ganjil), (titik_A_ganjil[0] + 1, titik_A_ganjil[1] + gradien_ganjil)))
 
 print("\nPersamaan garis hasil transformasi (NIM Ganjil):")
 print(persamaan_garis_ganjil)
-
-# print("\nKoordinat hasil transformasi (NIM Genap):")
-# cetak_koordinat(translasi_aksi, *titik_A_genap)
-# cetak_koordinat(rotasi_aksi, *titik_A_genap_transformed)
-# cetak_koordinat(perbesaran_aksi, *titik_A_genap_transformed)
 
 print("\nPersamaan garis sebelum transformasi (NIM Genap):")
 print(line_equation_of(point(*titik_A_genap), titik_B_genap))

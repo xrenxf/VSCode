@@ -52,14 +52,15 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.all(25.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // app name
               const Text(
                 "SMART HOME",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
         
               const SizedBox(height: 50),
@@ -107,19 +108,17 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Don't have an account?",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
                   ),
                   GestureDetector(
                     onTap: widget.onTap,
                     child: 
-                      const Text(
+                      Text(
                         "Register Here",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                   ),

@@ -10,10 +10,10 @@ class UsersPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("users"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.grey[700],
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("Users").snapshots(),
         builder: (context, snapshot) {

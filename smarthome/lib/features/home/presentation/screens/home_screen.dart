@@ -62,30 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: AssetImage('assets/images/avatar.jpg'),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Kristin',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            'kristin@gmail.com',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: Icon(Icons.favorite),
                     ),
 
                     const SizedBox(height: 25),
