@@ -7,6 +7,8 @@ function generator($n)
             echo "HelloWorld\n";
         } elseif ($i % 3 === 0) {
             echo "Hello\n";
+        } elseif ($i % 10 === 0) {
+            echo "Kristin\n";
         } elseif ($i % 5 === 0) {
             echo "World\n";
         } else {
