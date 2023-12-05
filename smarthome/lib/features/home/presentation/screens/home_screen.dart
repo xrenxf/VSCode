@@ -150,6 +150,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pushNamed(context, '/webview_page');
                         },
                       ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.notes_outlined,
+                          color: Colors.white,),
+                        title: const Text(
+                          'Noted',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/');
+                        },
+                      ),
                     )
                   ]
                 ),
