@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^4.13.1
   firebase_messaging: ^14.7.5
   appwrite: ^11.0.1
+  get_storage: ^2.1.1
 
 
 dev_dependencies:

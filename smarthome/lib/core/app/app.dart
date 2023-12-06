@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smarthome/appwrite/appwrite_page.dart';
 import 'package:smarthome/core/core.dart';
 import 'package:smarthome/features/home/presentation/screens/home_screen.dart';
 import 'package:smarthome/homepage/auth/auth.dart';
@@ -25,6 +26,7 @@ class SmartHomeApp extends StatelessWidget {
             '/profile_page':(context) => ProfilePage(),
             '/users_page':(context) => const UsersPage(),
             '/webview_page':(context) => const WebViewPage(),
+            '/appwrite_page':(context) => const AppWritePage(),
           }
         );
       },

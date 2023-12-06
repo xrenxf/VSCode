@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.pushNamed(context, '/');
+                          Navigator.pushNamed(context, '/appwrite_page');
                         },
                       ),
                     )
