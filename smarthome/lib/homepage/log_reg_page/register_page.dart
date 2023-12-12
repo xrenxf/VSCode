@@ -23,12 +23,12 @@ class _RegisterPageState extends State<RegisterPage> {
   // Register method
   void registerUser() async {
     // show loading circle
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => const Center(
+    //     child: CircularProgressIndicator(),
+    //   ),
+    // );
 
     // make sure passwords match
     if(passwordController.text != confirmController.text){
@@ -81,10 +81,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[600],
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
+       backgroundColor: Colors.white,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
             padding: const EdgeInsets.all(25.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +93,10 @@ class _RegisterPageState extends State<RegisterPage> {
                 // app name
                 const Text(
                   "SMART HOME",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(
+                    fontSize: 20,
+                     color: Colors.black,
+                  ),
                 ),
           
                 const SizedBox(height: 50),
@@ -158,18 +162,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Already have an account?",
+                    const Text(
+                      "Already have an account? ",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                         color: Colors.black,
                       ),
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: 
-                        const Text(
+                        Text(
                           "Login Here",
                           style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

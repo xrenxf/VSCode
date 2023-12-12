@@ -21,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   //Login method
   void login() async {
     // show loading circle
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => const Center(
+    //     child: CircularProgressIndicator(),
+    //   ),
+    // );
 
     // try sign in
     try {
@@ -53,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.grey[600],
       body: Center(
         child: Container(
+          color: Colors.white,
           padding: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               // app name
               const Text(
                 "SMART HOME",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
         
               const SizedBox(height: 50),
@@ -109,7 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account?",
+                    "Don't have an account? ",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
                   GestureDetector(
                     onTap: widget.onTap,
