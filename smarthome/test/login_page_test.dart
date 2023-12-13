@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -7,7 +8,10 @@ class MockFunction extends Mock {
   void call();
 }
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
   group('LoginPage Tests', () {
     testWidgets('Renders LoginPage Widget', (WidgetTester tester) async {
       // Build our app and trigger a frame.
