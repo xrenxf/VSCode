@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   //Login method
-  void login() async {
+  Future<void> login() async {
     // show loading circle
     // showDialog(
     //   context: context,
