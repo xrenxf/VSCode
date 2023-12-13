@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Icon(Icons.favorite),
                     ),
 
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 10),
 
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
