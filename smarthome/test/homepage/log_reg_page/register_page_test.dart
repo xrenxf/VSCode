@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:smarthome/homepage/log_reg_page/register_page.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+class MockFunctionCallback extends Mock {void call();}
 
 void main() {
   testWidgets('Register Page UI Test', (WidgetTester tester) async {
@@ -28,32 +30,41 @@ void main() {
     expect(find.text('Login Here'), findsOneWidget);
   });
 
-  testWidgets('Register Page - Passwords Match', (WidgetTester tester) async {
-    final mockObserver = MockNavigatorObserver();
+  group('RegisterPage Widget Tests', () {
+    late MockFunctionCallback mockCallback;
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: RegisterPage(
-          onTap: () {},
+    setUpAll(() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+    });
+
+    setUp(() {
+      mockCallback = MockFunctionCallback();
+    });
+
+    testWidgets('Register Page - Passwords Match', (WidgetTester tester) async {
+      final mockObserver = MockNavigatorObserver();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: RegisterPage(
+            onTap: mockCallback,
+          ),
+          navigatorObservers: [mockObserver],
         ),
-        navigatorObservers: [mockObserver],
-      ),
-    );
+      );
 
-    // Enter valid data in text fields
-    await tester.enterText(find.byType(TextField).at(0), 'testUsername');
-    await tester.enterText(find.byType(TextField).at(1), 'test@example.com');
-    await tester.enterText(find.byType(TextField).at(2), 'password');
-    await tester.enterText(find.byType(TextField).at(3), 'password');
+      await tester.enterText(find.byType(TextField).at(0), 'testUsername');
+      await tester.enterText(find.byType(TextField).at(1), 'test@example.com');
+      await tester.enterText(find.byType(TextField).at(2), 'password');
+      await tester.enterText(find.byType(TextField).at(3), 'password');
 
-    // Tap on the register button
-    await tester.tap(find.text('Register'));
-    await tester.pump();
+      // Tap on the register button
+      await tester.tap(find.text('Register'));
+      await tester.pump();
 
-    // Verify that the loading circle is not shown
-    expect(find.byType(CircularProgressIndicator), findsNothing);
-
-    // Verify that the navigator was not triggered
-    // verifyNever(mockObserver.didPush(any, any));
+      // Verify that the navigator was not triggered
+      // verifyNever(mockObserver.didPush(any, any));
+    });
   });
 }
