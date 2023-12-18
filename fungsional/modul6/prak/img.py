@@ -1,31 +1,36 @@
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
-# Langkah 1
-background_image = Image.open("background.jpg")
-overlay_image = Image.open("overlay.jpg")
+# Buka gambar
+background = Image.open("C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\background.jpg")
+overlay = Image.open("C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\overlay.png")
 
-# Langkah 2
-background_image = background_image.convert("L")  # Konversi ke mode Grayscale
-background_image = background_image.rotate(30)  # Rotasi 30 derajat
-background_image = background_image.filter(ImageFilter.BLUR)  # Blur
+# Ubah gambar menjadi hitam-putih (grayscale)
+backgroundBW = background.convert("L")
+backgroundBW = backgroundBW.rotate(30)
+backgroundBW = backgroundBW.filter(ImageFilter.BLUR)
 
-# Langkah 3
-brightness_factor = 1.23  # Ganti dengan dua digit NIM terakhir Anda
-contrast_factor = 1.45  # Ganti dengan dua digit NIM terakhir Anda
-background_image = background_image.point(lambda p: p * brightness_factor)
-background_image = background_image.point(lambda p: p * contrast_factor)
+overlay = overlay.convert("RGBA")
 
-# Langkah 4
-overlay_size = (150, 150)  # Ganti dengan ukuran sesuai kebutuhan
-overlay_image = overlay_image.resize(overlay_size)
-background_image.paste(overlay_image, (50, 50), overlay_image)
+overlay_brightness = ImageEnhance.Brightness(overlay)
+overlay = overlay_brightness.enhance(1.3)
 
-# Langkah 5
-draw = ImageDraw.Draw(background_image)
-font = ImageFont.truetype("arial.ttf", 24)  # Ganti dengan path font Arial di sistem Anda
+overlay_contrast = ImageEnhance.Contrast(overlay)
+overlay = overlay_contrast.enhance(1.7)
+
+# Sisipkan gambar overlay ke dalam gambar background
+backgroundBW.paste(overlay, (0, 0), overlay)
+
+draw = ImageDraw.Draw(backgroundBW)
+font_path = "C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\Alegreya-VariableFont_wght.ttf"
+font = ImageFont.truetype(font_path, 150)
 text = "Informatika JOSSS!"
-text_position = (50, 200)  # Ganti dengan posisi sesuai kebutuhan
-draw.text(text_position, text, font=font)
+text_width = draw.textlength(text, font)
+text_x = (background.width - text_width) // 2
+text_y = 500
+draw.text((text_x, text_y), text, 255, font)
 
-# Langkah 6
-background_image.save("tugas_praktikum_enam.jpg")
+# Simpan gambar hasil edit
+backgroundBW.save("tugas_praktikum_enam.jpg")
+
+# Tampilkan hasil pengolahan gambar
+backgroundBW.show()
