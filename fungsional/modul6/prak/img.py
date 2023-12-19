@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
 # Buka gambar
 background = Image.open("C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\background.jpg")
-overlay = Image.open("C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\overlay.png")
+overlay = Image.open("C:\\Users\\krist\\VSCode\\fungsional\\modul6\\prak\\overlay.jpg")
 
 # Ubah gambar menjadi hitam-putih (grayscale)
 backgroundBW = background.convert("L")
@@ -10,6 +10,7 @@ backgroundBW = backgroundBW.rotate(30)
 backgroundBW = backgroundBW.filter(ImageFilter.BLUR)
 
 overlay = overlay.convert("RGBA")
+overlay = overlay.resize((400, 400))
 
 overlay_brightness = ImageEnhance.Brightness(overlay)
 overlay = overlay_brightness.enhance(1.3)
