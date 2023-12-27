@@ -8,6 +8,14 @@ root = Tk()
 conn = sqlite3.connect("perpustakaan.db")
 cursor = conn.cursor()
 
+def simple_decorator(func):
+    def wrapper(*args, **kwargs):
+        print(f"Sebelum eksekusi {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"Sesudah eksekusi {func.__name__}")
+        return result
+    return wrapper
+
 def create_table():
     cursor.execute("DROP TABLE IF EXISTS LIBRARY")
     query = """
@@ -45,6 +53,7 @@ def update_trv(rows):
     for i in rows:
         trv.insert('', 'end', values=i)
 
+@simple_decorator
 def update_people():
     if messagebox.askyesno("Harap Konfirmasi", "Apakah Anda Serius ingin memperbaharui data ini?"):
         query = """
