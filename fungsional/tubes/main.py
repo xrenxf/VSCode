@@ -270,7 +270,7 @@ xscrollbar.pack(side=BOTTOM, fill="x")
 trv.configure(yscrollcommand=yscrollbar.set, xscrollcommand=xscrollbar.set)
 
 if __name__ == '__main__' :
-    root.title("Aplikasi Data Penduduk")
+    root.title("Aplikasi Data Perpustakaan")
     root.geometry("700x500")
     root.resizable(FALSE, FALSE)
     if(isFirst("LIBRARY")):
