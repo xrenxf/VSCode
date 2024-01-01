@@ -84,14 +84,14 @@ class _LoginState extends State<Login> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Error'),
-                            content: Text('Email or password is incorrect.'),
+                            title: const Text('Error'),
+                            content: const Text('Email or password is incorrect.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -99,7 +99,7 @@ class _LoginState extends State<Login> {
                       );
                     }
                   },
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
           
                 // don't have an account? Register here

@@ -80,7 +80,7 @@ class _HomeViewState extends State<HomeView>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     'Jumper Bird',
                     style: TextStyle(
@@ -91,28 +91,28 @@ class _HomeViewState extends State<HomeView>
                         Shadow(
                           blurRadius: 10.0,
                           color: Colors.black.withOpacity(0.5),
-                          offset: Offset(3, 3),
+                          offset: const Offset(3, 3),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Image.asset('assets/images/icon-game.png'), // Logo game
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: controller.startGame,
                     style: ElevatedButton.styleFrom(
                       primary: Colors.redAccent, // Warna tombol
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                          const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                       textStyle:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    child: Text('Mulai Bermain',
+                    child: const Text('Mulai Bermain',
                         style: TextStyle(
                             color: Colors.white)), // Teks berwarna putih
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
             ),

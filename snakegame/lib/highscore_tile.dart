@@ -20,14 +20,14 @@ class HighScoreTile extends StatelessWidget {
           return Row(
             children: [
               Text(data['score'].toString()),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(data['name']),
             ],
           );
         } else {
-          return Text('loading...');
+          return const Text('loading...');
         }
       }
     );

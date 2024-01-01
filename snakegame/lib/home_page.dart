@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
   // Start The Game!
   void startGame() {
     gameHasStarted = true;
-    Timer.periodic(Duration(milliseconds: 200), (timer) {
+    Timer.periodic(const Duration(milliseconds: 200), (timer) {
       setState(() {
         // keep the snake moving
         moveSnake();
@@ -82,13 +82,13 @@ class _HomePageState extends State<HomePage> {
             barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
-                title: Text('Game Over'),
+                title: const Text('Game Over'),
                 content: Column(
                   children: [
                     Text('Your score is: ' + currentScore.toString()),
                     TextField(
                       controller: _nameController,
-                      decoration: InputDecoration(hintText: 'Enter name'),
+                      decoration: const InputDecoration(hintText: 'Enter name'),
                     )
                   ],
                 ),
@@ -255,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                           Text('Current Score'),
                           Text(
                             currentScore.toString(),
-                            style: TextStyle(fontSize: 36),
+                            style: const TextStyle(fontSize: 36),
                           ),
                         ],
                       ),

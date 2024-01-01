@@ -48,13 +48,13 @@ class GameView extends StatelessWidget {
                   right: 20,
                   child: Text(
                     'Score: ${controller.score.value}',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: const TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 )),
             // Tombol Replay
             Obx(() => AnimatedOpacity(
                   opacity: controller.isGameOver.value ? 1.0 : 0.0,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: controller.isGameOver.value
                       ? Center(
                           child: Column(
@@ -70,20 +70,20 @@ class GameView extends StatelessWidget {
                                     Shadow(
                                       blurRadius: 10.0,
                                       color: Colors.black.withOpacity(0.5),
-                                      offset: Offset(3, 3),
+                                      offset: const Offset(3, 3),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () => controller.resetGame(),
-                                child: Text('Replay'),
+                                child: const Text('Replay'),
                               ),
                             ],
                           ),
                         )
-                      : SizedBox.shrink(),
+                      : const SizedBox.shrink(),
                 )),
           ],
         ),

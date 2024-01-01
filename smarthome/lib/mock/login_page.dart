@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Login'),
+          title: const Text('Login'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -30,18 +30,18 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               TextField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                 },
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
             ],
           ),
