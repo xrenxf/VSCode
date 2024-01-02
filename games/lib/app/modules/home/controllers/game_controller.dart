@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -142,6 +143,16 @@ class GameController extends GetxController {
   void increaseScore() {
     score.value++;
     playPointSound();
+  }
+
+  void submitScore() {
+    // get access to the collection
+    var database = FirebaseFirestore.instance;
+
+    // add data to firebase
+    database.collection('highscores').add({
+      "score": score.value,
+    });
   }
 
   void resetGame() {
