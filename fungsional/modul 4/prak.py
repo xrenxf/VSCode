@@ -1,71 +1,68 @@
-import math
+import numpy as np
 
-def translasi(tx, ty):
-    def transformasi_translasi(x, y):
-        return x + tx, y + ty
-    return transformasi_translasi
+# Dekorator untuk transformasi gabungan
+def transformasi_gabungan(fungsi):
+    def wrapper(x, y, *args, **kwargs):
+        # Memanggil fungsi asli untuk transformasi
+        hasil_transformasi = fungsi(x, y, *args, **kwargs)
 
-def dilatasi(sx, sy):
-    def transformasi_dilatasi(x, y):
-        return x * sx, y * sy
-    return transformasi_dilatasi
+        # Hitung gradien garis setelah transformasi
+        gradien_transformasi = hitung_gradien(x, y, *hasil_transformasi)
 
-def rotasi(sudut):
-    def transformasi_rotasi(x, y):
-        radian = math.radians(sudut)
-        x_baru = x * math.cos(radian) - y * math.sin(radian)
-        y_baru = x * math.sin(radian) + y * math.cos(radian)
-        return x_baru, y_baru
-    return transformasi_rotasi
+        # Cetak hasil
+        print("\nPersamaan garis baru setelah transformasi:")
+        print(format_persamaan_garis(gradien_transformasi, -gradien_transformasi * hasil_transformasi[0] + hasil_transformasi[1]))
 
-def cetak_koordinat(aksi_transformasi, x, y):
-    x_baru, y_baru = aksi_transformasi(x, y)
-    print(f"Koordinat setelah {aksi_transformasi.__name__}: ({x_baru}, {y_baru})")
+        return hasil_transformasi
 
-def point(x, y):
-    return x, y
+    return wrapper
 
-def line_equation_of(p1, p2):
-    def calculate_slope(p1, p2):
-        return (p2[1] - p1[1]) / (p2[0] - p1[0])
+# Fungsi untuk melakukan translasi
+@transformasi_gabungan
+def translasi(x, y, tx, ty):
+    return x + tx, y + ty
 
-    def calculate_intercept(p, m):
-        return p[1] - m * p[0]
+# Fungsi untuk melakukan rotasi
+@transformasi_gabungan
+def rotasi(x, y, derajat):
+    radian = np.radians(derajat)
+    x_rotasi = x * np.cos(radian) - y * np.sin(radian)
+    y_rotasi = x * np.sin(radian) + y * np.cos(radian)
+    return x_rotasi, y_rotasi
 
-    M = calculate_slope(p1, p2)
-    C = calculate_intercept(p1, M)
+# Fungsi untuk melakukan perbesaran skala
+@transformasi_gabungan
+def perbesaran_skala(x, y, faktor_x, faktor_y):
+    return x * faktor_x, y * faktor_y
 
-    return f"y = {M:.2f}x + {C:.2f}"
+# Fungsi untuk menghitung gradien garis
+def hitung_gradien(x1, y1, x2, y2):
+    return (y2 - y1) / (x2 - x1)
 
-# TUGAS 1
-titik_A_ganjil = (2, 3)
-gradien_ganjil = 2
+# Fungsi untuk mencetak persamaan garis dalam format yang diinginkan
+def format_persamaan_garis(gradien, titik):
+    return f"y = {gradien:.2f}x + {titik:.2f}" if titik >= 0 else f"y = {gradien:.2f}x - {-titik:.2f}"
 
-titik_A_genap = (2, 3)
-titik_B_genap = (7, 7)
+# Meminta input dari pengguna
+x_awal = float(input("Masukkan nilai x titik awal: "))
+y_awal = float(input("Masukkan nilai y titik awal: "))
+gradien_awal = float(input("Masukkan nilai gradien awal: "))
 
-# TUGAS 2
-translasi_aksi = translasi(2, -3)
-rotasi_aksi = rotasi(60)
-perbesaran_aksi = dilatasi(1.5, 2)
+# Menampilkan informasi titik awal
+print("\nInformasi titik awal:")
+print(f"Titik Awal: ({x_awal}, {y_awal})")
+print(f"Gradien Awal: {gradien_awal:.2f}")
 
-titik_A_ganjil_transformed = perbesaran_aksi(*rotasi_aksi(*translasi_aksi(*titik_A_ganjil)))
-titik_A_genap_transformed = perbesaran_aksi(*rotasi_aksi(*translasi_aksi(*titik_A_genap)))
-titik_B_genap_transformed = perbesaran_aksi(*rotasi_aksi(*translasi_aksi(*titik_B_genap)))
+# Translasi
+tx = float(input("\nMasukkan nilai translasi tx: "))
+ty = float(input("Masukkan nilai translasi ty: "))
+translasi(x_awal, y_awal, tx, ty)
 
-# TUGAS 3
-persamaan_garis_ganjil = line_equation_of(point(*titik_A_ganjil_transformed), point(*titik_A_ganjil))
-persamaan_garis_genap = line_equation_of(point(*titik_A_genap_transformed), point(*titik_B_genap_transformed))
+# Rotasi
+derajat_rotasi = float(input("\nMasukkan nilai derajat rotasi: "))
+rotasi(x_awal, y_awal, derajat_rotasi)
 
-# OUTPUT
-print("\nPersamaan garis sebelum transformasi (NIM Ganjil):")
-print(line_equation_of(point(*titik_A_ganjil), (titik_A_ganjil[0] + 1, titik_A_ganjil[1] + gradien_ganjil)))
-
-print("\nPersamaan garis hasil transformasi (NIM Ganjil):")
-print(persamaan_garis_ganjil)
-
-print("\nPersamaan garis sebelum transformasi (NIM Genap):")
-print(line_equation_of(point(*titik_A_genap), titik_B_genap))
-
-print("\nPersamaan garis hasil transformasi (NIM Genap):")
-print(persamaan_garis_genap)
+# Perbesaran skala
+faktor_skala_x = float(input("\nMasukkan nilai faktor skala pada sumbu x: "))
+faktor_skala_y = float(input("Masukkan nilai faktor skala pada sumbu y: "))
+perbesaran_skala(x_awal, y_awal, faktor_skala_x, faktor_skala_y)
