@@ -1,0 +1,16 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Problem_A2.keras_preprocessing" />
+          <option value="tensorflow_datasets" />
+          <option value="tensorflow.keras" />
+          <option value="Problem_A3.keras_preprocessing" />
+          <option value="tensorflow" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

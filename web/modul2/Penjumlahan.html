@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Penjumlahan</title>
+</head>
+<body>
+    <h1>PENJUMLAHAN BILANGAN</h1>
+    <div id="container">
+        <label for="txtNum1">Bilangan Pertama:</label>
+        <input type="text" id="txtNum1"/>
+
+        <label for="txtNum2">Bilangan Kedua:</label>
+        <input type="text" id="txtNum2"/><br/><br/>
+
+        <input type="button" value="Jumlahkan" onclick="add()"/>
+        <input type="button" value="Reset" onclick="reset()"/>
+    </div>
+
+    <script type="text/javascript">
+        function add(){
+            var num1 = Number(document.getElementById("txtNum1").value);
+            var num2 = Number(document.getElementById("txtNum2").value);
+            var sum = num1 + num2;
+            alert(sum);
+        }
+        function reset(){
+            document.getElementById("txtNum1".value);
+            document.getElementById("txtNum2".value);
+            document.getElementById("txtSum".value);
+        }
+    </script>
+
+</body>
+</html>

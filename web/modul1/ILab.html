@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ILab</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style type="text/css">
+      .custom-btn-login {
+        background-color: rgb(109, 151, 240);
+        width: 150;
+        height: 35px;
+        border: radius 10px;
+      }
+      body {
+        background-image: url("assetsILab/hero.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: 2000px 700px;
+      }
+      @media (max-width: 765px) {
+        .custom-btn-login {
+          width: 100%;
+        }
+      }
+      .footer-wrapper {
+        background-color: ghostwhite;
+        min-height: 100px;
+      }
+      footer {
+        margin-top: 300px;
+      }
+      .custom-text {
+        font-size: 10px;
+      }
+      .custom-text-small {
+        font-size: 13px;
+      }
+      .text-center {
+        color: white;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: aliceblue;
+      }
+      .nav-link.active {
+        margin-right: 30px;
+      }
+      .nav-link {
+        margin-right: 50px;
+      }
+      .follow-size {
+        font-size: 12px;
+      }
+      .custom-img {
+        width: 100px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><img src="assetsILab/logo-ilab.png" alt="logo" width="55" height="30"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div >
+          <ul class="navbar-nav">
+            <a
+              class="nav-link active"
+              style="margin-right: 20px"
+              aria-current="page"
+              href="#"
+              >HOME</a
+            >
+            <a class="nav-link active" style="margin-right: 20px" href="#"
+              >ABOUT US</a
+            >
+            <a class="nav-link active" style="margin-right: 400px" href="#"
+              >CONTACT</a
+            >
+            <button
+              type="button"
+              class="button btn custom-btn-signup"
+              style="margin-right: 10px"
+            >
+            Sign up
+            </button>
+            <td>
+                <button type="button" class="button btn-primary" disabled>
+                    Log in
+                </button>
+            </td>
+        </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--section title-->
+    <section class="container w-15 d-flex justify-content-between">
+      <div class="text-center">
+        <h1 style="margin-top: 250px">Selamat Datang</h1>
+        <p style="margin-top: 10px">di website Praktikum Pemrograman Website</p>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <div class="row h-100 footer-wrapper p-3">
+        <div class="col-md-3 col-xs-12 d-flex justify-content-center">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <img src="assetsILab/logo-ilab.png" alt="Gambar" class="custom-img">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-12">
+          <p><span class="custom-text-small">Services</span></p>
+          <p><span class="custom-text-small">Email Marketing</span></p>
+          <p><span class="custom-text-small">Campaigns</span></p>
+          <p><span class="custom-text-small">Branding</span></p>
+          <p><span class="custom-text-small">Offline</span></p>
+        </div>
+        <div class="col-md-3 col-xs-12">
+          <p><span class="custom-text-small">About</span></p>
+          <p><span class="custom-text-small">Our Story</span></p>
+          <p><span class="custom-text-small">Benefits</span></p>
+          <p><span class="custom-text-small">Team</span></p>
+          <p><span class="custom-text-small">Careers</span></p>
+        </div>
+        <div class="col-md-3 col-xs-12">
+          <p><span class="custom-text-small">follow us</span></p>
+          <div class="follow-size">
+          <div class="logo-with-text">
+            <img src="assetsILab/logo-facebook.png" alt="Logo" width="9" height="10" />
+            Facebook
+          </div>
+          <div class="logo-with-text">
+            <img src="assetsILab/logo-twitter.png" alt="Logo" width="10" height="10" />
+            Twitter
+          </div>
+          <div class="logo-with-text">
+            <img src="assetsILab/logo-instagram.png" alt="Logo" width="10" height="10" />
+            Instagram
+          </div>
+        </div>
+      </div>
+      <div class="row"></div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
