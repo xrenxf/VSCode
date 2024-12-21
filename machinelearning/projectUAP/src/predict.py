@@ -4,10 +4,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
+import joblib
 
-# Load pre-trained models
-model_ffnn = load_model('model/model_ffnn.h5')
-model_dnn = load_model('model/model_dnn.h5')
+# Load pre-trained models and scaler
+model_ffnn = load_model('model/model_ffnn.keras')
+model_dnn = load_model('model/model_dnn.keras')
+scaler = joblib.load('model/preprocessor.joblib')  # Scaler yang digunakan saat pelatihan
 
 # Streamlit app title
 st.title("Model Comparison: FFNN vs DNN")
@@ -30,7 +32,7 @@ categorical_features = ['Ship Mode', 'Segment', 'Region', 'Category', 'Sub-Categ
 processed_data = pd.DataFrame([data])
 processed_data = pd.get_dummies(processed_data, columns=categorical_features)
 
-# Ensure the order of features matches training data (placeholder feature list)
+# Ensure the order of features matches training data (expected features)
 expected_features = [
     'Sales', 'Quantity', 'Discount', 'Ship Mode_First Class', 'Ship Mode_Second Class',
     'Ship Mode_Standard Class', 'Ship Mode_Same Day', 'Segment_Consumer', 'Segment_Corporate',
@@ -48,8 +50,12 @@ for feature in expected_features:
         processed_data[feature] = 0
 
 processed_data = processed_data[expected_features]
-scaler = StandardScaler()
-processed_data = scaler.fit_transform(processed_data)
+
+# Use pre-saved scaler to scale data
+processed_data = scaler.transform(processed_data)
+
+# Debugging: Check the shape of input data
+st.write("Processed Data Shape:", processed_data.shape)
 
 # Predictions
 st.write("## Predictions")
