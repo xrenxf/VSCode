@@ -1,110 +1,102 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
-from sklearn.preprocessing import StandardScaler
 import joblib
+from tensorflow.keras.models import load_model
+import plotly.express as px
 
-# Load pre-trained models and scaler
-model_ffnn = load_model('model/model_ffnn.keras')
-model_dnn = load_model('model/model_dnn.keras')
-scaler = joblib.load('model/preprocessor.joblib')  # Scaler yang digunakan saat pelatihan
+# Set page configuration
+st.set_page_config(page_title="Prediksi Profit Penjualan", layout="wide", page_icon="📊")
+st.title("📊 Prediksi Profit Penjualan - FFNN & DNN")
 
-# Streamlit app title
-st.title("Model Comparison: FFNN vs DNN")
-st.markdown("This app allows you to manually input data and compare the performance of FFNN and DNN for profit prediction.")
+# Load preprocessor and models
+@st.cache_resource
+def load_resources():
+    preprocessor = joblib.load('model/preprocessor.joblib')
+    model_ffnn = load_model('model/model_ffnn.h5')
+    model_dnn = load_model('model/model_dnn.h5')
+    return preprocessor, model_ffnn, model_dnn
 
-# Manual data input
-st.write("## Input Data")
-data = {}
-data['Sales'] = st.number_input("Sales", value=0.0)
-data['Quantity'] = st.number_input("Quantity", value=0.0)
-data['Discount'] = st.number_input("Discount", value=0.0)
-data['Ship Mode'] = st.selectbox("Ship Mode", ["First Class", "Second Class", "Standard Class", "Same Day"])
-data['Segment'] = st.selectbox("Segment", ["Consumer", "Corporate", "Home Office"])
-data['Region'] = st.selectbox("Region", ["East", "West", "Central", "South"])
-data['Category'] = st.selectbox("Category", ["Furniture", "Office Supplies", "Technology"])
-data['Sub-Category'] = st.selectbox("Sub-Category", ["Bookcases", "Chairs", "Tables", "Accessories", "Appliances", "Art", "Binders", "Envelopes", "Fasteners", "Labels", "Paper", "Storage", "Supplies"])
+preprocessor, model_ffnn, model_dnn = load_resources()
 
-# Preprocessing categorical data (One-hot encoding example)
-categorical_features = ['Ship Mode', 'Segment', 'Region', 'Category', 'Sub-Category']
-processed_data = pd.DataFrame([data])
-processed_data = pd.get_dummies(processed_data, columns=categorical_features)
+# Tab navigation
+tabs = st.tabs(["Input Manual", "Upload File"])
 
-# Ensure the order of features matches training data (expected features)
-expected_features = [
-    'Sales', 'Quantity', 'Discount', 'Ship Mode_First Class', 'Ship Mode_Second Class',
-    'Ship Mode_Standard Class', 'Ship Mode_Same Day', 'Segment_Consumer', 'Segment_Corporate',
-    'Segment_Home Office', 'Region_East', 'Region_West', 'Region_Central', 'Region_South',
-    'Category_Furniture', 'Category_Office Supplies', 'Category_Technology',
-    'Sub-Category_Bookcases', 'Sub-Category_Chairs', 'Sub-Category_Tables',
-    'Sub-Category_Accessories', 'Sub-Category_Appliances', 'Sub-Category_Art',
-    'Sub-Category_Binders', 'Sub-Category_Envelopes', 'Sub-Category_Fasteners',
-    'Sub-Category_Labels', 'Sub-Category_Paper', 'Sub-Category_Storage',
-    'Sub-Category_Supplies'
-]
+# --- Input Manual ---
+with tabs[0]:
+    st.subheader("Input Data Manual")
+    
+    data = {}
+    data['Sales'] = st.number_input("Sales", value=0.0, step=0.01, format="%.2f")
+    data['Quantity'] = st.number_input("Quantity", value=1, step=1)
+    data['Discount'] = st.slider("Discount (%)", value=0.0, min_value=0.0, max_value=100.0)
+    data['Ship Mode'] = st.selectbox("Ship Mode", ["First Class", "Second Class", "Standard Class", "Same Day"])
+    data['Segment'] = st.selectbox("Segment", ["Consumer", "Corporate", "Home Office"])
+    data['Category'] = st.selectbox("Category", ["Furniture", "Office Supplies", "Technology"])
+    data['Sub-Category'] = st.selectbox(
+        "Sub-Category", ["Bookcases", "Chairs", "Tables", "Accessories", "Appliances", "Art", "Binders", "Envelopes",
+        "Fasteners", "Labels", "Paper", "Storage", "Supplies"]
+    )
 
-for feature in expected_features:
-    if feature not in processed_data.columns:
-        processed_data[feature] = 0
+    input_df = pd.DataFrame([data])
+    st.write("### Data Input")
+    st.write(input_df)
 
-processed_data = processed_data[expected_features]
+    model_choice = st.radio("Pilih Model untuk Prediksi", ["FFNN", "DNN"], horizontal=True)
 
-# Use pre-saved scaler to scale data
-processed_data = scaler.transform(processed_data)
+    if st.button("Prediksi Manual"):
+        try:
+            # Preprocess and predict
+            processed_input = preprocessor.transform(input_df).toarray()
+            model = model_ffnn if model_choice == "FFNN" else model_dnn
+            prediction = model.predict(processed_input)
 
-# Debugging: Check the shape of input data
-st.write("Processed Data Shape:", processed_data.shape)
+            # Display results
+            prediction_label = "Profit" if prediction[0][0] > 0.5 else "Non-Profit"
+            st.success(f"Hasil Prediksi: {prediction_label}")
+            st.metric(label="Nilai Profit", value=f"{prediction[0][0]:.2f}")
+        except Exception as e:
+            st.error(f"Terjadi kesalahan: {e}")
 
-# Predictions
-st.write("## Predictions")
+# --- Upload File ---
+with tabs[1]:
+    st.subheader("Upload File untuk Prediksi")
+    uploaded_file = st.file_uploader("Unggah File CSV", type="csv")
 
-predictions_ffnn = model_ffnn.predict(processed_data)
-predictions_dnn = model_dnn.predict(processed_data)
+    if uploaded_file is not None:
+        try:
+            data = pd.read_csv(uploaded_file)
+            st.write("### Data yang Diunggah")
+            st.dataframe(data.head())
 
-predicted_classes_ffnn = np.argmax(predictions_ffnn, axis=1)
-predicted_classes_dnn = np.argmax(predictions_dnn, axis=1)
+            processed_data = preprocessor.transform(data).toarray()
 
-st.write("### FFNN Predictions")
-st.write(f"Prediction: {'Profit' if predicted_classes_ffnn[0] == 1 else 'No Profit'}")
+            model_choice = st.radio("Pilih Model untuk Prediksi", ["FFNN", "DNN"], key="file_model_choice", horizontal=True)
+            model = model_ffnn if model_choice == "FFNN" else model_dnn
+            predictions = model.predict(processed_data)
 
-st.write("### DNN Predictions")
-st.write(f"Prediction: {'Profit' if predicted_classes_dnn[0] == 1 else 'No Profit'}")
+            # Generate results
+            prediction_labels = ["Profit" if pred[0] > 0.5 else "Non-Profit" for pred in predictions]
+            profit_values = [pred[0] for pred in predictions]
+            results = pd.DataFrame({"Kategori": prediction_labels, "Nilai Profit": profit_values})
 
-# Comparison visualization
-st.write("## Performance Comparison")
+            st.write("### Hasil Prediksi")
+            st.dataframe(results)
 
-# Simulating correct and incorrect predictions (replace with actual data if available)
-correct_predictions = [np.sum(predicted_classes_ffnn == 1), np.sum(predicted_classes_dnn == 1)]
-incorrect_predictions = [1 - correct_predictions[0], 1 - correct_predictions[1]]  # Assuming binary classification
+            # Visualize predictions
+            st.write("### Visualisasi Prediksi")
+            fig = px.bar(
+                results["Kategori"].value_counts(),
+                x=results["Kategori"].value_counts().index,
+                y=results["Kategori"].value_counts().values,
+                title="Distribusi Prediksi",
+                labels={"x": "Kategori", "y": "Jumlah"},
+                text_auto=True,
+            )
+            st.plotly_chart(fig)
 
-models = ['FFNN', 'DNN']
-fig, ax = plt.subplots()
-width = 0.35
+            # Download predictions
+            csv_output = results.to_csv(index=False).encode("utf-8")
+            st.download_button("Unduh Hasil Prediksi", data=csv_output, file_name="predictions.csv", mime="text/csv")
 
-rects1 = ax.bar(np.arange(len(models)), correct_predictions, width, label='Correct')
-rects2 = ax.bar(np.arange(len(models)) + width, incorrect_predictions, width, label='Incorrect')
-
-ax.set_ylabel('Number of Predictions')
-ax.set_title('Comparison of Predictions')
-ax.set_xticks(np.arange(len(models)) + width / 2)
-ax.set_xticklabels(models)
-ax.legend()
-
-def autolabel(rects):
-    for rect in rects:
-        height = rect.get_height()
-        ax.annotate('{}'.format(height),
-                    xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),
-                    textcoords="offset points",
-                    ha='center', va='bottom')
-
-autolabel(rects1)
-autolabel(rects2)
-
-st.pyplot(fig)
-
-st.write("---")
-st.markdown("Developed with ❤️ using Streamlit.")
+        except Exception as e:
+            st.error(f"Terjadi kesalahan: {e}")
