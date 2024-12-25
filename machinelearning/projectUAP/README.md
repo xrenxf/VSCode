@@ -1,6 +1,6 @@
 # Prediksi Profit Penjualan Menggunakan Perbandingan Model FFNN dan DNN
 
-##  Deskripsi Proyek
+## 📄 Deskripsi Proyek
 Proyek ini bertujuan untuk memprediksi kategori profit (‘Profit_Category’) berdasarkan fitur-fitur penjualan dari dataset Superstore. Dua jenis model yang digunakan untuk prediksi ini, yaitu Feedforward Neural Network (FFNN) dan Deep Neural Network (DNN). Dengan membandingkan performa kedua model ,untuk analisis profit penjualan.
 
 ## 📊 Dataset
@@ -24,29 +24,29 @@ Dataset yang digunakan berasal dari https://www.kaggle.com/datasets/roopacalistu
 
 ## 🚀 Alur Proyek
 **1. Preprocessing Data**
-    - Augmentasi Data: Karena jumlah data asli tidak mencukupi, dilakukan augmentasi data dengan oversampling.
-    - Transformasi Fitur:
-        - Fitur numerik (“Sales”, “Quantity”, “Discount”) dinormalisasi menggunakan StandardScaler.
-        -Fitur kategori diubah menjadi representasi numerik menggunakan OneHotEncoder.
-    - Pipeline Preprocessing: Menggunakan ColumnTransformer untuk menerapkan preprocessing ke fitur numerik dan kategori.
+- Augmentasi Data: Karena jumlah data asli tidak mencukupi, dilakukan augmentasi data dengan oversampling.
+- Transformasi Fitur:
+-- Fitur numerik (“Sales”, “Quantity”, “Discount”) dinormalisasi menggunakan StandardScaler.
+-- Fitur kategori diubah menjadi representasi numerik menggunakan OneHotEncoder.
+- Pipeline Preprocessing: Menggunakan ColumnTransformer untuk menerapkan preprocessing ke fitur numerik dan kategori.
 
 **2. Pengembangan Model**
-    **a. Feedforward Neural Network (FFNN)**
-    - Arsitektur sederhana dengan 2 hidden layer.
-    - Aktivasi: ReLU untuk hidden layer, softmax untuk output.
-    - Optimizer: Adam.
+**a. Feedforward Neural Network (FFNN)**
+- Arsitektur sederhana dengan 2 hidden layer.
+- Aktivasi: ReLU untuk hidden layer, softmax untuk output.
+- Optimizer: Adam.
 
-    **b. Deep Neural Network (DNN)**
-    - Arsitektur lebih kompleks dengan 3 hidden layer, lebih banyak neuron, dan dropout untuk mengurangi overfitting.
-    - Aktivasi: Sama dengan FFNN.
-    - Optimizer: Adam.
+**b. Deep Neural Network (DNN)**
+- Arsitektur lebih kompleks dengan 3 hidden layer, lebih banyak neuron, dan dropout untuk mengurangi overfitting.
+- Aktivasi: Sama dengan FFNN.
+- Optimizer: Adam.
 
-    **3. Evaluasi Model**
-    - Metode Evaluasi: Confusion Matrix, Akurasi, Precision, Recall, dan F1-Score.
-    - Visualisasi: Kurva akurasi dan loss selama pelatihan, serta Confusion Matrix untuk masing-masing model.
+**3. Evaluasi Model**
+- Metode Evaluasi: Confusion Matrix, Akurasi, Precision, Recall, dan F1-Score.
+- Visualisasi: Kurva akurasi dan loss selama pelatihan, serta Confusion Matrix untuk masing-masing model.
 
-    **4. Prediksi Data Baru**
-    Model digunakan untuk memprediksi kategori profit berdasarkan data baru dengan preprocessing yang telah dilatih.
+**4. Prediksi Data Baru**
+Model digunakan untuk memprediksi kategori profit berdasarkan data baru dengan preprocessing yang telah dilatih.
 
 ## 💻 Bahasa yang Digunakan
 **Python**
