@@ -23,11 +23,11 @@ Dataset yang digunakan berasal dari https://www.kaggle.com/datasets/roopacalistu
 - Non-Profit: Profit ≤ 0
 
 ## 🚀 Alur Proyek
-**1. Preprocessing Data**
+### 1. Preprocessing Data
 - Augmentasi Data: Karena jumlah data asli tidak mencukupi, dilakukan augmentasi data dengan oversampling.
 - Transformasi Fitur:
--- Fitur numerik (“Sales”, “Quantity”, “Discount”) dinormalisasi menggunakan StandardScaler.
--- Fitur kategori diubah menjadi representasi numerik menggunakan OneHotEncoder.
+- Fitur numerik (“Sales”, “Quantity”, “Discount”) dinormalisasi menggunakan StandardScaler.
+- Fitur kategori diubah menjadi representasi numerik menggunakan OneHotEncoder.
 - Pipeline Preprocessing: Menggunakan ColumnTransformer untuk menerapkan preprocessing ke fitur numerik dan kategori.
 
 **2. Pengembangan Model**
@@ -46,7 +46,7 @@ Dataset yang digunakan berasal dari https://www.kaggle.com/datasets/roopacalistu
 - Visualisasi: Kurva akurasi dan loss selama pelatihan, serta Confusion Matrix untuk masing-masing model.
 
 **4. Prediksi Data Baru**
-Model digunakan untuk memprediksi kategori profit berdasarkan data baru dengan preprocessing yang telah dilatih.
+- Model digunakan untuk memprediksi kategori profit berdasarkan data baru dengan preprocessing yang telah dilatih.
 
 ## 💻 Bahasa yang Digunakan
 **Python**
